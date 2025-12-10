@@ -1,12 +1,32 @@
+import { useState } from "react";
 import type { ProductType } from "../types/ProductType";
 
 interface ProductListProps {
   products: ProductType[];
+  itemsPerPage?: number;
 }
 
-const ProductList = ({ products }: ProductListProps) => {
+const ProductList = ({ products, itemsPerPage = 10 }: ProductListProps) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = Math.ceil(products.length / itemsPerPage);
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentProducts = products.slice(startIndex, startIndex + itemsPerPage);
+
+  const handlePrev = () => {
+    setCurrentPage((prev) => Math.max(prev - 1, 1));
+  };
+
+  const handleNext = () => {
+    setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+  };
+
+  const handlePageClick = (page: number) => {
+    setCurrentPage(page);
+  };
+
   return (
-    <div className="flex justify-center mt-5">
+    <div className="flex flex-col items-center mt-5">
       <table className="w-5/6 border-collapse border border-gray-400 shadow-lg rounded-lg overflow-hidden">
         <thead>
           <tr className="bg-gray-300">
@@ -18,7 +38,7 @@ const ProductList = ({ products }: ProductListProps) => {
         </thead>
 
         <tbody>
-          {products.map((product) => (
+          {currentProducts.map((product) => (
             <tr key={product.id} className="hover:bg-gray-100 transition-all">
               <td className="border border-gray-300 text-left px-4 py-2">
                 {product.name}
@@ -36,6 +56,36 @@ const ProductList = ({ products }: ProductListProps) => {
           ))}
         </tbody>
       </table>
+
+      <div className="flex space-x-2 mt-4 mb-10">
+        <button
+          onClick={handlePrev}
+          disabled={currentPage === 1}
+          className="px-3 py-1 bg-gray-300 rounded disabled:opacity-50"
+        >
+          Prev
+        </button>
+
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+          <button
+            key={page}
+            onClick={() => handlePageClick(page)}
+            className={`px-3 py-1 rounded ${
+              currentPage === page ? "bg-blue-500 text-white" : "bg-gray-200"
+            }`}
+          >
+            {page}
+          </button>
+        ))}
+
+        <button
+          onClick={handleNext}
+          disabled={currentPage === totalPages}
+          className="px-3 py-1 bg-gray-300 rounded disabled:opacity-50"
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };
