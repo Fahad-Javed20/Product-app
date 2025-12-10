@@ -9,7 +9,6 @@ interface ProductListProps {
 const ProductList = ({ products, itemsPerPage = 10 }: ProductListProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(products.length / itemsPerPage);
-
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentProducts = products.slice(startIndex, startIndex + itemsPerPage);
 
@@ -27,6 +26,10 @@ const ProductList = ({ products, itemsPerPage = 10 }: ProductListProps) => {
 
   return (
     <div className="flex flex-col items-center mt-5">
+      <label className="mb-5 bg-purple-700 px-3 py-1 rounded-lg text-white ml-245">
+        Total Products:{products.length + 1}{" "}
+      </label>
+
       <table className="w-5/6 border-collapse border border-gray-400 shadow-lg rounded-lg overflow-hidden">
         <thead>
           <tr className="bg-gray-300">
