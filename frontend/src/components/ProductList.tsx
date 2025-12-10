@@ -5,8 +5,8 @@ interface ProductListProps {
 }
 const ProductList = ({ products }: ProductListProps) => {
   return (
-    <div>
-      <table>
+    <div className="flex justify-center">
+      <table className="w-300 border-collapse border border-gray-400">
         <thead>
           <tr>
             <th className="border">Name</th>
@@ -18,10 +18,10 @@ const ProductList = ({ products }: ProductListProps) => {
         <tbody>
           {products.map((product) => (
             <tr key={product.id}>
-              <td className="border">{product.name}</td>
-              <td className="border">{product.category}</td>
-              <td className="border">{product.price}</td>
-              <td className="border">{product.rating}</td>
+              <td className="border text-left px-3">{product.name}</td>
+              <td className="border px-3">{product.category}</td>
+              <td className="border px-3">{product.price}</td>
+              <td className="border px-3">{product.rating}</td>
             </tr>
           ))}
         </tbody>

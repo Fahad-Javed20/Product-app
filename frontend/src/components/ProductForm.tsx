@@ -1,13 +1,22 @@
 import { useForm } from "react-hook-form";
 import type { ProductType } from "../types/ProductType";
 
-const ProductForm = () => {
+interface ProductFormProps {
+  onAddProduct: (data: ProductType) => void;
+}
+
+const ProductForm = ({ onAddProduct }: ProductFormProps) => {
   const {
     register,
-    handelSubmit,
+    handleSubmit,
     reset,
     formState: { errors },
   } = useForm<ProductType>();
+
+  const onsubmit = (data: ProductType) => {
+    onAddProduct(data);
+    reset();
+  }
 
   return (
     <>
@@ -16,7 +25,10 @@ const ProductForm = () => {
           Product Entry Form
         </h1>
 
-        <form className="bg-gray-200 px-10 py-6 rounded-lg shadow-md w-full max-w-[500px]">
+        <form
+          onSubmit={handleSubmit(onsubmit)}
+          className="bg-gray-200 px-10 py-6 rounded-lg shadow-md w-full max-w-[500px]"
+        >
           <section className="mb-4 ">
             <label className="block mb-1 font-semibold text-gray-700">
               Name

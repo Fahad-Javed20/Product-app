@@ -4,7 +4,7 @@ import ProductList from "./ProductList";
 import type { ProductType } from "../types/ProductType";
 
 const ProductDashboard = () => {
-  const [products, setProducts] = useState<ProductType>([]);
+  const [products, setProducts] = useState<ProductType[]>([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -14,9 +14,13 @@ const ProductDashboard = () => {
     };
     fetchProducts();
   }, []);
+
+  const handleProduct = (newProduct: ProductType) => {
+    setProducts((prev) => [...prev, newProduct]);
+  };
   return (
-    <div>
-      <ProductForm />
+    <div className="flex flex-col gap-10">
+      <ProductForm onAddProduct={handleProduct} />
       <ProductList products={products} />
     </div>
   );
