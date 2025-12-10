@@ -16,7 +16,7 @@ const ProductDashboard = () => {
   }, []);
 
   const handleProduct = (newProduct: ProductType) => {
-    setProducts((prev) => [...prev, newProduct]);
+    setProducts((prev) => [newProduct,...prev ]);
   };
   return (
     <div className="flex flex-col gap-10">

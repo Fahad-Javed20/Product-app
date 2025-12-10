@@ -6,9 +6,9 @@ interface ProductListProps {
 const ProductList = ({ products }: ProductListProps) => {
   return (
     <div className="flex justify-center">
-      <table className="w-300 border-collapse border border-gray-400">
+      <table className="w-300 border-collapse border">
         <thead>
-          <tr>
+          <tr className="bg-gray-300">
             <th className="border">Name</th>
             <th className="border">Category</th>
             <th className="border">Price</th>

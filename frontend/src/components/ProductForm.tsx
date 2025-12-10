@@ -16,7 +16,7 @@ const ProductForm = ({ onAddProduct }: ProductFormProps) => {
   const onsubmit = (data: ProductType) => {
     onAddProduct(data);
     reset();
-  }
+  };
 
   return (
     <>
@@ -27,7 +27,7 @@ const ProductForm = ({ onAddProduct }: ProductFormProps) => {
 
         <form
           onSubmit={handleSubmit(onsubmit)}
-          className="bg-gray-200 px-10 py-6 rounded-lg shadow-md w-full max-w-[500px]"
+          className="bg-gray-100 px-10 py-6 rounded-lg shadow-md w-full max-w-[700px]"
         >
           <section className="mb-4 ">
             <label className="block mb-1 font-semibold text-gray-700">
