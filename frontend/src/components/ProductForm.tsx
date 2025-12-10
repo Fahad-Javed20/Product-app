@@ -2,8 +2,12 @@ import { useForm } from "react-hook-form";
 import type { ProductType } from "../types/ProductType";
 
 const ProductForm = () => {
-
-const [register,handelSubmit,reset,formState:{errors}] = useForm<ProductType>([])
+  const {
+    register,
+    handelSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<ProductType>();
 
   return (
     <>
@@ -19,9 +23,13 @@ const [register,handelSubmit,reset,formState:{errors}] = useForm<ProductType>([]
             </label>
 
             <input
+              {...register("name", { required: true })}
               type="text"
               className="w-full px-3 py-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-700 focus:border-amber-700"
             />
+            {errors.name && (
+              <span className="text-red-500">This field is required</span>
+            )}
           </section>
           <section className="mb-4 ">
             <label className="block mb-1 font-semibold text-gray-700">
@@ -31,7 +39,11 @@ const [register,handelSubmit,reset,formState:{errors}] = useForm<ProductType>([]
             <input
               type="text"
               className="w-full px-3 py-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-700 focus:border-amber-700"
+              {...register("category", { required: true })}
             />
+            {errors.category && (
+              <p className="text-red-500">This filed is required</p>
+            )}
           </section>
           <section className="mb-4 ">
             <label className="block mb-1 font-semibold text-gray-700">
@@ -41,7 +53,11 @@ const [register,handelSubmit,reset,formState:{errors}] = useForm<ProductType>([]
             <input
               type="number"
               className="w-full px-3 py-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-700 focus:border-amber-700"
+              {...register("price", { required: true })}
             />
+            {errors.price && (
+              <p className="text-red-500">This filed is required</p>
+            )}
           </section>
 
           <section className="mb-4 ">
@@ -51,9 +67,14 @@ const [register,handelSubmit,reset,formState:{errors}] = useForm<ProductType>([]
 
             <input
               type="number"
-              max={5} min={1}
+              max={5}
+              min={1}
               className="w-full px-3 py-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-700 focus:border-amber-700"
+              {...register("rating", { required: true })}
             />
+            {errors.rating && (
+              <p className="text-red-500">This filed is required</p>
+            )}
           </section>
         </form>
       </section>
